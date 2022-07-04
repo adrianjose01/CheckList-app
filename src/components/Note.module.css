@@ -1,0 +1,21 @@
+.note p,
+.note input {
+  margin: 10px;
+  color: #000;
+}
+
+.note {
+  display: flex;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  padding: 3px;
+}
+
+input {
+  cursor: pointer;
+}

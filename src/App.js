@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useEffect, useState } from "react";
+import Header from "./components/Header";
+import NewNote from "./components/NewNote";
+import Note from "./components/Note";
+import Container from "./UI/Container";
+import getNotes from "./helpers/getNotes";
 
-function App() {
+const App = () => {
+  const [notes, setNotes] = useState([]);
+
+  const deleteNotes = (id) => {
+    const newNotes = notes.filter((n) => n.id !== id);
+    setNotes(newNotes);
+  };
+
+  const addNote = (newNote) => {
+    setNotes((prevNotes) => [...prevNotes, newNote]);
+  };
+
+  useEffect(() => {
+    getNotes().then((n) => setNotes(n));
+  }, [setNotes]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header />
+      <NewNote onAddNote={addNote} />
+      <Container>
+        {notes.map((note) => (
+          <Note
+            message={note.message}
+            key={note.id}
+            id={note.id}
+            onDeleteNotes={deleteNotes}
+          />
+        ))}
+        {notes.length === 0 && (
+          <p style={{ color: "red" }}>Your CheckList is Empty!</p>
+        )}
+      </Container>
+    </Fragment>
   );
-}
+};
 
 export default App;
