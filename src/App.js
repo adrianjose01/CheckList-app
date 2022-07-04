@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import NewNote from "./components/NewNote";
 import Note from "./components/Note";
@@ -19,10 +19,10 @@ const App = () => {
 
   useEffect(() => {
     getNotes().then((n) => setNotes(n));
-  }, [setNotes]);
+  }, []);
 
   return (
-    <Fragment>
+    <>
       <Header />
       <NewNote onAddNote={addNote} />
       <Container>
@@ -38,7 +38,7 @@ const App = () => {
           <p style={{ color: "red" }}>Your CheckList is Empty!</p>
         )}
       </Container>
-    </Fragment>
+    </>
   );
 };
 
