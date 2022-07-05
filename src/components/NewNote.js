@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useRef } from "react";
 import classes from "./NewNote.module.css";
-import postNewNote from "../helpers/postNewNote";
+import { postNewNote } from "../endpoints/requests";
 
 const NewNote = (props) => {
   const [isAddingNote, setIsAddingNote] = useState(false);

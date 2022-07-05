@@ -3,14 +3,16 @@ import Header from "./components/Header";
 import NewNote from "./components/NewNote";
 import Note from "./components/Note";
 import Container from "./UI/Container";
-import getNotes from "./helpers/getNotes";
+import { getNotes } from "./endpoints/requests";
+import { deleteNotes } from "./endpoints/requests";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
 
-  const deleteNotes = (id) => {
+  const deleteNotesHandler = (id) => {
     const newNotes = notes.filter((n) => n.id !== id);
     setNotes(newNotes);
+    deleteNotes(id);
   };
 
   const addNote = (newNote) => {
@@ -31,7 +33,7 @@ const App = () => {
             message={note.message}
             key={note.id}
             id={note.id}
-            onDeleteNotes={deleteNotes}
+            onDeleteNotes={deleteNotesHandler}
           />
         ))}
         {notes.length === 0 && (

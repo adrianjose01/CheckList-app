@@ -1,13 +1,11 @@
 import React, { useRef } from "react";
 import Card from "../UI/Card";
 import classes from "./Note.module.css";
-import deleteNotes from "../helpers/deleteNotes";
 
 const Note = (props) => {
   const inputCheckNote = useRef();
 
   const deleteButtonHandler = () => {
-    deleteNotes(props.id);
     props.onDeleteNotes(props.id);
   };
 
